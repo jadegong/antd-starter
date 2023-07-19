@@ -36,4 +36,14 @@ export default {
     }
     res.send(ret);
   },
+  'POST /api/user/logout': (req: Request, res: Response) => {
+    res.send(
+      mockjs.mock({
+        status: '0',
+        data: {},
+        total: 0,
+        message: 'success',
+      }),
+    );
+  },
 };

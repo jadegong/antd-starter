@@ -75,6 +75,7 @@ const MobileLoginForm: React.FC = () => {
           message: '成功',
           description: '登录成功，即将跳转！',
         })
+        sessionStorage.setItem(constants.MUTATION_TYPES.USER_INFO_SESSION_STORAGE, res.data)
         sessionStorage.setItem(constants.MUTATION_TYPES.ACCESS_TOKEN, res.data.token)
         navigate('/docs')
       }

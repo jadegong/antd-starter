@@ -14,6 +14,8 @@ export const loginApi = {
   // 手机号登录
   sendSmsCode: apiPrefix + '/user/login/sendSms',
   mobileLogin: apiPrefix + '/user/login/mobile',
+  // 注销登录
+  logout: apiPrefix + '/user/logout',
 };
 
 export function getSliderImg(parameter: any) {
@@ -48,6 +50,10 @@ export function sendSmsCode(parameter: any) {
   });
 }
 
-
-
-
+export function logout(parameter: any) {
+  return request({
+    url: loginApi.logout,
+    method: 'post',
+    data: parameter,
+  });
+}
