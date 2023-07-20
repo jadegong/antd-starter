@@ -8,6 +8,7 @@ export default defineConfig({
       key: 'index',
       label: 'index',
       layout: false,
+      wrappers: ['@/wrappers/auth'],
       routes: [
         {
           path: '/docs',
@@ -17,7 +18,7 @@ export default defineConfig({
         },
         {
           path: '/products',
-          // component: '@/layouts/SiderMenuOnlyLayout',
+          // component: '@/layouts/SideMenuOnlyLayout',
           component: '@/pages/products/index',
           key: 'products',
           label: '产品',

@@ -1,6 +1,6 @@
 /**
- * 只有顶部菜单的布局;
- * v0.0.1 2023/07/18 gqd new file;
+ * 只有侧边菜单的布局;
+ * v0.0.1 2023/07/20 gqd new file;
  */
 import React, { useEffect, useState, } from 'react'
 import { Outlet, useAppData, useLocation, useNavigate, } from 'umi';
@@ -15,7 +15,7 @@ import logoPng from '@/assets/yay.jpg'
 
 import './index.less';
 
-const TopMenuOnlyLayout: React.FC = () => {
+const SideMenuOnlyLayout: React.FC = () => {
   // states
   const [selectedTopKeys, setSelectedTopKeys] = useState(Array<any>())
   const [topMenus, setTopMenus] = useState(Array<any>())
@@ -80,4 +80,4 @@ const TopMenuOnlyLayout: React.FC = () => {
     </div>
   );
 }
-export default TopMenuOnlyLayout
+export default SideMenuOnlyLayout
