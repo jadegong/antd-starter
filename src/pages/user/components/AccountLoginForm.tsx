@@ -1,4 +1,5 @@
 import React, { useState, } from 'react'
+import { useNavigate, } from 'umi'
 import constants from '@/utils/constants'
 import {
   passwordLogin,
@@ -8,12 +9,28 @@ import {
   Button,
   Form,
   Input,
+  notification,
 } from 'antd'
 
 const AccountLoginForm: React.FC = () => {
+  // constants
+  const navigate = useNavigate()
   const [form] = Form.useForm()
+
   const submitAccountForm = (values: any) => {
-    console.log(values)
+    // TODO: 临时登录
+    passwordLogin(values).then((res: any) => {
+      if (res.status === constants.REQUEST_STATUS.SUCCESS) {
+        // DONE: Jump
+        notification.success({
+          message: '成功',
+          description: '登录成功，即将跳转！',
+        })
+        sessionStorage.setItem(constants.MUTATION_TYPES.USER_INFO_SESSION_STORAGE, res.data)
+        sessionStorage.setItem(constants.MUTATION_TYPES.ACCESS_TOKEN, res.data.token)
+        navigate('/docs')
+      }
+    })
   }
 
   return (

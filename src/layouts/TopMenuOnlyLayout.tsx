@@ -1,10 +1,12 @@
 /**
  * 只有顶部菜单的布局;
  * v0.0.1 2023/07/18 gqd new file;
+ *        2023/08/01 gqd 路由变化后的逻辑处理;
  */
 import React, { useEffect, useState, } from 'react'
-import { Outlet, useAppData, useLocation, useNavigate, } from 'umi';
+import { Outlet, useLocation, useNavigate, useSelectedRoutes, } from 'umi';
 import settings from '@/defaultSettings'
+import MenuIcons from '../../config/router.config'
 
 import {
   Menu,
@@ -20,26 +22,33 @@ const TopMenuOnlyLayout: React.FC = () => {
   const [selectedTopKeys, setSelectedTopKeys] = useState(Array<any>())
   const [topMenus, setTopMenus] = useState(Array<any>())
 
-  const appData = useAppData()
   const locationObj = useLocation()
   const navigateObj = useNavigate()
+
+  const selectedRoutes = useSelectedRoutes()
 
   // functions
   // 菜单切换
   const handleTopMenuClick = (e: any) => {
     setSelectedTopKeys([e.key])
     // DONE: 路由跳转
-    navigateObj(`/${e.keyPath}`)
+    navigateObj(e.item.props.path)
   }
 
   useEffect(() => {
-    if (appData.clientRoutes) {
-      let routes = appData?.clientRoutes[0]?.children || []
-      let temp = routes.map((item: any) => ({
-        key: item.key,
-        label: item.label,
-        path: item.path,
-      }))
+    if (selectedRoutes[1]) {
+      let routes = selectedRoutes[1]?.route?.children || []
+      let temp = Array<any>()
+      routes.forEach((item: any) => {
+        if (item.path !== selectedRoutes[1].pathname) { // 剔除redirect的路由配置
+          temp.push({
+            key: item.key,
+            label: item.label,
+            path: item.path,
+            icon: MenuIcons[item.key],
+          })
+        }
+      })
       setTopMenus(temp)
     }
   }, [])
@@ -49,12 +58,12 @@ const TopMenuOnlyLayout: React.FC = () => {
     if (topMenus.length <= 0) return
     let temp = Array<any>()
     topMenus.forEach((item: any) => {
-      if (locationObj.pathname === item.path) {
+      if (locationObj.pathname.indexOf(item.path) >= 0) {
         temp.push(item.key)
       }
     })
     setSelectedTopKeys(temp)
-  }, [topMenus])
+  }, [topMenus, locationObj])
 
   return (
     <div className="top-menu-layout-container">

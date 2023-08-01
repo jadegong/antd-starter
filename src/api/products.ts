@@ -8,6 +8,7 @@ const { apiPrefix } = settings
 
 export const productsApi = {
   productsList: apiPrefix + '/products/list',
+  productsCategory: apiPrefix + '/products/category',
 };
 
 export function productsList(parameter: any) {
@@ -17,3 +18,12 @@ export function productsList(parameter: any) {
     data: parameter,
   });
 }
+
+export function productsCategory(parameter: any) {
+  return request({
+    url: productsApi.productsCategory,
+    method: 'post',
+    data: parameter,
+  });
+}
+

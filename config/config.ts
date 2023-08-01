@@ -1,4 +1,10 @@
 import { defineConfig } from 'umi';
+import settings from '../src/defaultSettings'
+// import {
+//   AppstoreOutlined,
+//   FileWordOutlined,
+//   UnorderedListOutlined,
+// } from '@ant-design/icons'
 
 export default defineConfig({
   routes: [
@@ -11,23 +17,40 @@ export default defineConfig({
       wrappers: ['@/wrappers/auth'],
       routes: [
         {
+          path: '/',
+          redirect: '/docs',
+        },
+        {
           path: '/docs',
           component: '@/pages/docs',
           key: 'docs',
           label: '文档',
+          // icon: FileWordOutlined,
         },
         {
           path: '/products',
-          // component: '@/layouts/SideMenuOnlyLayout',
-          component: '@/pages/products/index',
+          component: '@/layouts/SideMenuOnlyLayout',
           key: 'products',
           label: '产品',
-          // routes: [
-          //   {
-          //     path: '/products/list',
-          //     component: '@/pages/products/index',
-          //   },
-          // ],
+          // icon: AppstoreOutlined,
+          routes: [
+            {
+              path: '/products',
+              redirect: '/products/list',
+            },
+            {
+              path: '/products/list',
+              component: '@/pages/products/index',
+              key: 'productsList',
+              label: '产品列表',
+            },
+            {
+              path: '/products/category',
+              component: '@/pages/products/ProductsCategory',
+              key: 'productsCategory',
+              label: '产品分类',
+            },
+          ],
         },
       ],
     },
@@ -35,9 +58,13 @@ export default defineConfig({
       path: '/user',
       component: '@/layouts/BlankLayout',
       key: 'user',
-      label: 'user',
+      label: '用户',
       layout: false,
       routes: [
+        {
+          path: '/user',
+          redirect: '/user/login',
+        },
         {
           path: '/user/login',
           component: '@/pages/user/login',
@@ -47,5 +74,7 @@ export default defineConfig({
       ],
     },
   ],
+  base: settings.packageName + '/',
+  outputPath: '.' + settings.packageName,
   npmClient: 'npm',
 });
