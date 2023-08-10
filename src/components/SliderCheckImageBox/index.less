@@ -1,0 +1,72 @@
+.loginCheckImageBox {
+    width: 300px;
+    height: auto;
+    margin: 0 auto;
+    position: relative;
+    .loginCheckImageContent {
+        width: 300px;
+        height: 150px;
+        position: relative;
+        .loginCheckImageMask {
+            position: absolute;
+            height: 50px;
+            width: 50px;
+            z-index: 1;
+        }
+        .loginCheckImageBack {
+            height: 150px;
+            width: 300px;
+        }
+    }
+    .loginCheckImageSlider {
+        position: relative;
+        margin: 10px auto auto;
+        width: 300px;
+        height: 40px;
+        background-color: #fff;
+        .loginCheckImageSliderArrow {
+            position: absolute;
+            margin-left: 0;
+            width: 50px;
+            height: 40px;
+            text-align: center;
+            z-index: 1;
+            cursor: pointer;
+            background: url("../../assets/sliderCheckImage/slider_icon.png") no-repeat center / contain;
+            img {
+                width: 50px;
+                height: 30px;
+                margin-top: 6px;
+            }
+        }
+        .loginCheckImageSliderMask {
+            position: absolute;
+            top: 15px;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background-color: #eef2f5;
+        }
+    }
+    .loginCheckImageResultCover {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, .4);
+        text-align: center;
+        z-index: 1;
+        img {
+            width: 50px;
+            height: 50px;
+            display: block;
+            margin: 35px auto 20px;
+        }
+        p {
+            color: #fff;
+            font-size: 14px;
+            margin: 0;
+        }
+    }
+}
