@@ -1,3 +1,7 @@
+/**
+ * 路由配置;
+ * v0.0.1 2023/11/01 gqd 增加异常页面;
+ */
 import { defineConfig } from 'umi';
 import settings from '../src/defaultSettings'
 // import {
@@ -72,6 +76,31 @@ export default defineConfig({
           label: '登录',
         },
       ],
+    },
+    {
+      path: '/exception',
+      component: '@/layouts/TopMenuOnlyLayout',
+      key: 'exception',
+      label: '异常',
+      layout: false,
+      routes: [
+        {
+          path: '/exception/403',
+          component: '@/pages/403',
+          key: 'exception403',
+          label: '异常403',
+        },
+        {
+          path: '/exception/404',
+          component: '@/pages/404',
+          key: 'exception404',
+          label: '异常404',
+        },
+      ],
+    },
+    {
+      path: '/*',
+      redirect: '/exception/404',
     },
   ],
   base: settings.packageName + '/',
